@@ -54,9 +54,11 @@
                 </div>
 
                 <!-- Mobile menu button -->
-                <button id="mobile-menu-button" class="md:hidden p-2 text-gray-700 hover:text-primary-red transition-colors duration-300">
+                <button id="mobile-menu-button"
+                    class="md:hidden p-2 text-gray-700 hover:text-primary-red transition-colors duration-300">
                     <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M4 6h16M4 12h16M4 18h16"></path>
                     </svg>
                 </button>
             </div>
@@ -510,7 +512,13 @@
 
                 <!-- Contact Form -->
                 <div class="lg:col-span-2 bg-gray-50 p-8 rounded-xl">
-                    <form id="contactForm" class="space-y-6">
+                    <form id="contactForm" action="https://formspree.io/f/xpzqkqkq" method="POST" class="space-y-6">
+                        <!-- Campo oculto para email de destino -->
+                        <input type="hidden" name="_to" value="fullstack.ads@gmail.com">
+                        <input type="hidden" name="_subject" value="Novo contato do site Simplifique+">
+                        <input type="hidden" name="_replyto" value="">
+                        <input type="hidden" name="_cc" value="">
+
                         <div class="grid md:grid-cols-2 gap-6">
                             <div>
                                 <label for="nome" class="block text-sm font-medium text-gray-700 mb-2">Nome completo
@@ -603,7 +611,7 @@
                                 Enviando...
                             </span>
                         </button>
-                        <p class="text-sm text-gray-500 text-center">Sua mensagem será enviada por email</p>
+                        <p class="text-sm text-gray-500 text-center">Sua mensagem será enviada diretamente para nosso email</p>
 
                         <!-- Feedback Messages -->
                         <div id="feedbackMessage" class="hidden mt-4 p-4 rounded-lg"></div>
@@ -722,9 +730,9 @@
             // Mobile menu toggle
             const mobileMenuButton = document.getElementById('mobile-menu-button');
             const mobileMenu = document.getElementById('mobile-menu');
-            
+
             if (mobileMenuButton && mobileMenu) {
-                mobileMenuButton.addEventListener('click', function() {
+                mobileMenuButton.addEventListener('click', function () {
                     mobileMenu.classList.toggle('hidden');
                 });
             }
@@ -748,7 +756,7 @@
             const contactForm = document.querySelector('#contactForm');
             if (contactForm) {
                 console.log('Formulário encontrado!'); // Debug
-
+                
                 contactForm.addEventListener('submit', function (e) {
                     e.preventDefault();
                     console.log('Formulário enviado!'); // Debug
@@ -771,40 +779,46 @@
                         return;
                     }
 
-                    // Montar o assunto do email
-                    let assunto = `Contato do Site - ${nome}`;
-                    if (empresa) assunto += ` (${empresa})`;
-
-                    // Montar o corpo do email
-                    let corpoEmail = `Olá!\n\n`;
-                    corpoEmail += `Recebi um novo contato através do site da Simplifique+.\n\n`;
-                    corpoEmail += `DADOS DO CONTATO:\n`;
-                    corpoEmail += `Nome: ${nome}\n`;
-                    if (empresa) corpoEmail += `Empresa: ${empresa}\n`;
-                    corpoEmail += `Email: ${email}\n`;
-                    corpoEmail += `Telefone: ${telefone}\n`;
-                    if (cargo) corpoEmail += `Cargo: ${cargo}\n`;
-                    if (funcionarios) corpoEmail += `Número de Funcionários: ${funcionarios}\n`;
-                    if (interesse) corpoEmail += `Interesse: ${interesse}\n`;
-                    if (mensagem) corpoEmail += `Mensagem: ${mensagem}\n\n`;
-                    corpoEmail += `---\n`;
-                    corpoEmail += `Enviado através do formulário de contato do site simplifique.com.br`;
-
-                    // Criar o link mailto
-                    const emailUrl = `mailto:fullstack.ads@gmail.com?subject=${encodeURIComponent(assunto)}&body=${encodeURIComponent(corpoEmail)}`;
-
-                    console.log('Email URL:', emailUrl); // Debug
-                    console.log('Assunto:', assunto); // Debug
-                    console.log('Corpo:', corpoEmail); // Debug
-
-                    // Tentar abrir o cliente de email
-                    try {
-                        window.open(emailUrl, '_blank');
-                        console.log('Cliente de email aberto!'); // Debug
-                    } catch (error) {
-                        console.error('Erro ao abrir cliente de email:', error); // Debug
-                        alert('Erro ao abrir o cliente de email. Verifique se você tem um cliente de email configurado.');
+                    // Mostrar loading no botão
+                    const submitBtn = document.getElementById('submitBtn');
+                    const btnText = document.getElementById('btnText');
+                    const btnLoading = document.getElementById('btnLoading');
+                    
+                    if (submitBtn && btnText && btnLoading) {
+                        submitBtn.disabled = true;
+                        btnText.classList.add('hidden');
+                        btnLoading.classList.remove('hidden');
                     }
+
+                    // Enviar para Formspree
+                    fetch('https://formspree.io/f/xpzqkqkq', {
+                        method: 'POST',
+                        body: formData,
+                        headers: {
+                            'Accept': 'application/json'
+                        }
+                    })
+                    .then(response => {
+                        console.log('Resposta do Formspree:', response); // Debug
+                        if (response.ok) {
+                            alert('Mensagem enviada com sucesso! Entraremos em contato em breve.');
+                            contactForm.reset();
+                        } else {
+                            throw new Error('Erro ao enviar formulário');
+                        }
+                    })
+                    .catch(error => {
+                        console.error('Erro:', error); // Debug
+                        alert('Erro ao enviar mensagem. Tente novamente ou entre em contato por telefone.');
+                    })
+                    .finally(() => {
+                        // Restaurar botão
+                        if (submitBtn && btnText && btnLoading) {
+                            submitBtn.disabled = false;
+                            btnText.classList.remove('hidden');
+                            btnLoading.classList.add('hidden');
+                        }
+                    });
                 });
             } else {
                 console.error('Formulário não encontrado!'); // Debug
