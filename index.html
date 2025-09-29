@@ -703,8 +703,9 @@
         });
 
         // Contact form handling
-        document.querySelector('form').addEventListener('submit', function (e) {
+        document.querySelector('#contactForm').addEventListener('submit', function (e) {
             e.preventDefault();
+            console.log('Formulário enviado!'); // Debug
 
             const formData = new FormData(this);
             const nome = formData.get('nome');
@@ -737,6 +738,10 @@
 
             // Criar o link mailto
             const emailUrl = `mailto:fullstack.ads@gmail.com?subject=${encodeURIComponent(assunto)}&body=${encodeURIComponent(corpoEmail)}`;
+            
+            console.log('Email URL:', emailUrl); // Debug
+            console.log('Assunto:', assunto); // Debug
+            console.log('Corpo:', corpoEmail); // Debug
             
             // Abrir o cliente de email
             window.open(emailUrl, '_blank');
