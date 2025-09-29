@@ -693,58 +693,84 @@
     </div>
 
     <script>
-        // Smooth scrolling
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-                const target = document.querySelector(this.getAttribute('href'));
-                if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        // Aguardar o DOM carregar completamente
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log('DOM carregado!'); // Debug
+            
+            // Smooth scrolling
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    const target = document.querySelector(this.getAttribute('href'));
+                    if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                });
             });
-        });
 
-        // Contact form handling
-        document.querySelector('#contactForm').addEventListener('submit', function (e) {
-            e.preventDefault();
-            console.log('Formulário enviado!'); // Debug
+            // Contact form handling
+            const contactForm = document.querySelector('#contactForm');
+            if (contactForm) {
+                console.log('Formulário encontrado!'); // Debug
+                
+                contactForm.addEventListener('submit', function (e) {
+                    e.preventDefault();
+                    console.log('Formulário enviado!'); // Debug
 
-            const formData = new FormData(this);
-            const nome = formData.get('nome');
-            const empresa = formData.get('empresa');
-            const email = formData.get('email');
-            const telefone = formData.get('telefone');
-            const cargo = formData.get('cargo');
-            const funcionarios = formData.get('funcionarios');
-            const interesse = formData.get('interesse');
-            const mensagem = formData.get('mensagem');
+                    const formData = new FormData(this);
+                    const nome = formData.get('nome');
+                    const empresa = formData.get('empresa');
+                    const email = formData.get('email');
+                    const telefone = formData.get('telefone');
+                    const cargo = formData.get('cargo');
+                    const funcionarios = formData.get('funcionarios');
+                    const interesse = formData.get('interesse');
+                    const mensagem = formData.get('mensagem');
 
-            // Montar o assunto do email
-            let assunto = `Contato do Site - ${nome}`;
-            if (empresa) assunto += ` (${empresa})`;
+                    console.log('Dados coletados:', { nome, empresa, email, telefone, cargo, funcionarios, interesse, mensagem }); // Debug
 
-            // Montar o corpo do email
-            let corpoEmail = `Olá!\n\n`;
-            corpoEmail += `Recebi um novo contato através do site da Simplifique+.\n\n`;
-            corpoEmail += `DADOS DO CONTATO:\n`;
-            corpoEmail += `Nome: ${nome}\n`;
-            if (empresa) corpoEmail += `Empresa: ${empresa}\n`;
-            corpoEmail += `Email: ${email}\n`;
-            corpoEmail += `Telefone: ${telefone}\n`;
-            if (cargo) corpoEmail += `Cargo: ${cargo}\n`;
-            if (funcionarios) corpoEmail += `Número de Funcionários: ${funcionarios}\n`;
-            if (interesse) corpoEmail += `Interesse: ${interesse}\n`;
-            if (mensagem) corpoEmail += `Mensagem: ${mensagem}\n\n`;
-            corpoEmail += `---\n`;
-            corpoEmail += `Enviado através do formulário de contato do site simplifique.com.br`;
+                    // Validar campos obrigatórios
+                    if (!nome || !email || !telefone) {
+                        alert('Por favor, preencha os campos obrigatórios (Nome, Email e Telefone).');
+                        return;
+                    }
 
-            // Criar o link mailto
-            const emailUrl = `mailto:fullstack.ads@gmail.com?subject=${encodeURIComponent(assunto)}&body=${encodeURIComponent(corpoEmail)}`;
-            
-            console.log('Email URL:', emailUrl); // Debug
-            console.log('Assunto:', assunto); // Debug
-            console.log('Corpo:', corpoEmail); // Debug
-            
-            // Abrir o cliente de email
-            window.open(emailUrl, '_blank');
+                    // Montar o assunto do email
+                    let assunto = `Contato do Site - ${nome}`;
+                    if (empresa) assunto += ` (${empresa})`;
+
+                    // Montar o corpo do email
+                    let corpoEmail = `Olá!\n\n`;
+                    corpoEmail += `Recebi um novo contato através do site da Simplifique+.\n\n`;
+                    corpoEmail += `DADOS DO CONTATO:\n`;
+                    corpoEmail += `Nome: ${nome}\n`;
+                    if (empresa) corpoEmail += `Empresa: ${empresa}\n`;
+                    corpoEmail += `Email: ${email}\n`;
+                    corpoEmail += `Telefone: ${telefone}\n`;
+                    if (cargo) corpoEmail += `Cargo: ${cargo}\n`;
+                    if (funcionarios) corpoEmail += `Número de Funcionários: ${funcionarios}\n`;
+                    if (interesse) corpoEmail += `Interesse: ${interesse}\n`;
+                    if (mensagem) corpoEmail += `Mensagem: ${mensagem}\n\n`;
+                    corpoEmail += `---\n`;
+                    corpoEmail += `Enviado através do formulário de contato do site simplifique.com.br`;
+
+                    // Criar o link mailto
+                    const emailUrl = `mailto:fullstack.ads@gmail.com?subject=${encodeURIComponent(assunto)}&body=${encodeURIComponent(corpoEmail)}`;
+                    
+                    console.log('Email URL:', emailUrl); // Debug
+                    console.log('Assunto:', assunto); // Debug
+                    console.log('Corpo:', corpoEmail); // Debug
+                    
+                    // Tentar abrir o cliente de email
+                    try {
+                        window.open(emailUrl, '_blank');
+                        console.log('Cliente de email aberto!'); // Debug
+                    } catch (error) {
+                        console.error('Erro ao abrir cliente de email:', error); // Debug
+                        alert('Erro ao abrir o cliente de email. Verifique se você tem um cliente de email configurado.');
+                    }
+                });
+            } else {
+                console.error('Formulário não encontrado!'); // Debug
+            }
         });
     </script>
 </body>
