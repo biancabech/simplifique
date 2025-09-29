@@ -1,0 +1,736 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simplifique+ - Sistema de Controle de TurnOver</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: { 'inter': ['Inter', 'sans-serif'] },
+                    colors: {
+                        'primary-red': '#E60011', 'primary-blue': '#0C0A59', 'primary-green': '#034001',
+                        'primary-orange': '#FCAB10', 'primary-purple': '#622F56'
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+
+<body class="bg-white text-gray-900 font-inter">
+    <!-- Header -->
+    <header class="fixed top-0 left-0 right-0 bg-white/95 backdrop-blur-md border-b border-gray-200 z-50">
+        <nav class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16">
+                <div class="flex items-center space-x-3">
+                    <div class="w-12 h-12 flex items-center justify-center">
+                        <svg width="48" height="48" viewBox="0 0 48 48" fill="none">
+                            <rect x="8" y="6" width="32" height="28" rx="2" stroke="#E60011" stroke-width="2"
+                                fill="none" />
+                            <line x1="12" y1="12" x2="28" y2="12" stroke="#E60011" stroke-width="1.5" />
+                            <line x1="12" y1="16" x2="24" y2="16" stroke="#E60011" stroke-width="1.5" />
+                            <line x1="12" y1="20" x2="26" y2="20" stroke="#E60011" stroke-width="1.5" />
+                            <path d="M20 24L24 28L20 32" stroke="#E60011" stroke-width="2" fill="none" />
+                        </svg>
+                    </div>
+                    <span class="text-2xl font-bold text-primary-blue">simplifique<span
+                            class="text-primary-red">+</span></span>
+                </div>
+                <div class="hidden md:flex items-center space-x-8">
+                    <a href="#inicio"
+                        class="text-gray-700 hover:text-primary-red transition-colors duration-300 font-medium">Início</a>
+                    <a href="#recursos"
+                        class="text-gray-700 hover:text-primary-red transition-colors duration-300 font-medium">Recursos</a>
+                    <a href="#precos"
+                        class="text-gray-700 hover:text-primary-red transition-colors duration-300 font-medium">Preços</a>
+                    <a href="#contato"
+                        class="text-gray-700 hover:text-primary-red transition-colors duration-300 font-medium">Fale
+                        conosco</a>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Hero Section -->
+    <section id="inicio" class="pt-20 pb-16 bg-gradient-to-br from-gray-50 to-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid lg:grid-cols-2 gap-12 items-center">
+                <div class="space-y-8">
+                    <h1 class="text-5xl lg:text-6xl font-bold text-primary-blue leading-tight">Controle de TurnOver
+                        <span class="text-primary-red">Simplificado</span>
+                    </h1>
+                    <p class="text-xl text-gray-600 leading-relaxed">Gerencie o turnover da sua empresa de forma
+                        eficiente e inteligente. Reduza custos, melhore a retenção e tome decisões baseadas em dados
+                        reais.</p>
+                    <div class="flex flex-col sm:flex-row gap-4">
+                        <a href="https://wa.me/5547992842922?text=Olá! Gostaria de começar a usar o sistema de controle de TurnOver da Simplifique+"
+                            target="_blank"
+                            class="bg-primary-red text-white px-8 py-4 rounded-lg font-semibold text-lg hover:bg-red-700 transition-all duration-300 shadow-lg hover:shadow-xl transform hover:-translate-y-1 inline-block text-center">Começar
+                            Agora</a>
+                        <button
+                            class="border-2 border-primary-blue text-primary-blue px-8 py-4 rounded-lg font-semibold text-lg hover:bg-primary-blue hover:text-white transition-all duration-300">Ver
+                            Demonstração</button>
+                    </div>
+                    <div class="flex flex-wrap gap-8 pt-8">
+                        <div class="text-center">
+                            <div class="text-3xl font-bold text-primary-red">500+</div>
+                            <div class="text-gray-600 font-medium">Empresas</div>
+                        </div>
+                        <div class="text-center">
+                            <div class="text-3xl font-bold text-primary-red">30%</div>
+                            <div class="text-gray-600 font-medium">Redução no TurnOver</div>
+                        </div>
+                        <div class="text-center">
+                            <div class="text-3xl font-bold text-primary-red">99%</div>
+                            <div class="text-gray-600 font-medium">Satisfação</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="relative">
+                    <div class="bg-white rounded-2xl shadow-2xl p-6 border border-gray-200">
+                        <div class="flex items-center space-x-3 mb-6">
+                            <div class="flex space-x-2">
+                                <div class="w-3 h-3 bg-red-500 rounded-full"></div>
+                                <div class="w-3 h-3 bg-yellow-500 rounded-full"></div>
+                                <div class="w-3 h-3 bg-green-500 rounded-full"></div>
+                            </div>
+                            <span class="text-sm font-medium text-gray-600">Dashboard Simplifique+</span>
+                        </div>
+                        <div class="space-y-6">
+                            <div class="h-32 flex items-end space-x-2">
+                                <div class="bg-gradient-to-t from-primary-red to-primary-orange w-8 rounded-t"
+                                    style="height: 60%"></div>
+                                <div class="bg-gradient-to-t from-primary-red to-primary-orange w-8 rounded-t"
+                                    style="height: 80%"></div>
+                                <div class="bg-gradient-to-t from-primary-red to-primary-orange w-8 rounded-t"
+                                    style="height: 45%"></div>
+                                <div class="bg-gradient-to-t from-primary-red to-primary-orange w-8 rounded-t"
+                                    style="height: 90%"></div>
+                                <div class="bg-gradient-to-t from-primary-red to-primary-orange w-8 rounded-t"
+                                    style="height: 70%"></div>
+                            </div>
+                            <div class="grid grid-cols-2 gap-4">
+                                <div class="bg-gray-50 p-4 rounded-lg text-center">
+                                    <div class="text-2xl font-bold text-primary-red">15%</div>
+                                    <div class="text-sm text-gray-600">TurnOver Atual</div>
+                                </div>
+                                <div class="bg-gray-50 p-4 rounded-lg text-center">
+                                    <div class="text-2xl font-bold text-primary-green">-5%</div>
+                                    <div class="text-sm text-gray-600">vs. Mês Anterior</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section id="recursos" class="py-20 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl font-bold text-primary-blue mb-4">Recursos Poderosos</h2>
+                <p class="text-xl text-gray-600 max-w-3xl mx-auto">Tudo que você precisa para gerenciar o turnover da
+                    sua empresa</p>
+            </div>
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <div
+                    class="bg-white p-8 rounded-xl shadow-lg border border-gray-200 hover:shadow-xl transition-all duration-300 hover:-translate-y-2">
+                    <div class="w-12 h-12 bg-primary-red/10 rounded-lg flex items-center justify-center mb-6">
+                        <svg class="w-6 h-6 text-primary-red" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                        </svg>
+                    </div>
+                    <h3 class="text-xl font-semibold text-primary-blue mb-4">Análise em Tempo Real</h3>
+                    <p class="text-gray-600 leading-relaxed">Monitore o turnover da sua empresa em tempo real com
+                        dashboards interativos e relatórios detalhados.</p>
+                </div>
+                <div
+                    class="bg-white p-8 rounded-xl shadow-lg border border-gray-200 hover:shadow-xl transition-all duration-300 hover:-translate-y-2">
+                    <div class="w-12 h-12 bg-primary-blue/10 rounded-lg flex items-center justify-center mb-6">
+                        <svg class="w-6 h-6 text-primary-blue" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M15 17h5l-5 5-5-5h5v-5a7.5 7.5 0 0 0-15 0v5h5l-5 5-5-5h5v-5a7.5 7.5 0 0 1 15 0v5z">
+                            </path>
+                        </svg>
+                    </div>
+                    <h3 class="text-xl font-semibold text-primary-blue mb-4">Alertas Inteligentes</h3>
+                    <p class="text-gray-600 leading-relaxed">Receba notificações automáticas quando o turnover atingir
+                        níveis preocupantes ou padrões anômalos.</p>
+                </div>
+                <div
+                    class="bg-white p-8 rounded-xl shadow-lg border border-gray-200 hover:shadow-xl transition-all duration-300 hover:-translate-y-2">
+                    <div class="w-12 h-12 bg-primary-green/10 rounded-lg flex items-center justify-center mb-6">
+                        <svg class="w-6 h-6 text-primary-green" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z">
+                            </path>
+                        </svg>
+                    </div>
+                    <h3 class="text-xl font-semibold text-primary-blue mb-4">Relatórios Avançados</h3>
+                    <p class="text-gray-600 leading-relaxed">Gere relatórios personalizados com insights profundos sobre
+                        padrões de turnover e tendências.</p>
+                </div>
+                <div
+                    class="bg-white p-8 rounded-xl shadow-lg border border-gray-200 hover:shadow-xl transition-all duration-300 hover:-translate-y-2">
+                    <div class="w-12 h-12 bg-primary-orange/10 rounded-lg flex items-center justify-center mb-6">
+                        <svg class="w-6 h-6 text-primary-orange" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M13 10V3L4 14h7v7l9-11h-7z"></path>
+                        </svg>
+                    </div>
+                    <h3 class="text-xl font-semibold text-primary-blue mb-4">Integração Fácil</h3>
+                    <p class="text-gray-600 leading-relaxed">Conecte-se facilmente com seus sistemas existentes de RH e
+                        gestão de pessoas.</p>
+                </div>
+                <div
+                    class="bg-white p-8 rounded-xl shadow-lg border border-gray-200 hover:shadow-xl transition-all duration-300 hover:-translate-y-2">
+                    <div class="w-12 h-12 bg-primary-purple/10 rounded-lg flex items-center justify-center mb-6">
+                        <svg class="w-6 h-6 text-primary-purple" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z">
+                            </path>
+                        </svg>
+                    </div>
+                    <h3 class="text-xl font-semibold text-primary-blue mb-4">Previsões Inteligentes</h3>
+                    <p class="text-gray-600 leading-relaxed">Use IA para prever tendências de turnover e tomar decisões
+                        proativas.</p>
+                </div>
+                <div
+                    class="bg-white p-8 rounded-xl shadow-lg border border-gray-200 hover:shadow-xl transition-all duration-300 hover:-translate-y-2">
+                    <div class="w-12 h-12 bg-primary-red/10 rounded-lg flex items-center justify-center mb-6">
+                        <svg class="w-6 h-6 text-primary-red" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4">
+                            </path>
+                        </svg>
+                    </div>
+                    <h3 class="text-xl font-semibold text-primary-blue mb-4">Gestão Multi-empresa</h3>
+                    <p class="text-gray-600 leading-relaxed">Gerencie o turnover de múltiplas empresas e filiais em uma
+                        única plataforma.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Pricing Section -->
+    <section id="precos" class="py-20 bg-gray-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl font-bold text-primary-blue mb-4">Planos e Preços</h2>
+                <p class="text-xl text-gray-600 max-w-3xl mx-auto">Escolha o plano ideal para sua empresa</p>
+            </div>
+            <div class="grid md:grid-cols-3 gap-8 max-w-5xl mx-auto">
+                <div
+                    class="bg-white p-8 rounded-2xl shadow-lg border border-gray-200 hover:shadow-xl transition-all duration-300">
+                    <div class="text-center mb-8">
+                        <h3 class="text-2xl font-bold text-primary-blue mb-4">Básico</h3>
+                        <div class="flex items-baseline justify-center"><span
+                                class="text-3xl font-bold text-primary-red">R$ 99</span><span
+                                class="text-gray-600 ml-2">/mês</span></div>
+                    </div>
+                    <ul class="space-y-4 mb-8">
+                        <li class="flex items-center"><svg class="w-5 h-5 text-primary-green mr-3" fill="currentColor"
+                                viewBox="0 0 20 20">
+                                <path fill-rule="evenodd"
+                                    d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+                                    clip-rule="evenodd"></path>
+                            </svg>Até 50 funcionários</li>
+                        <li class="flex items-center"><svg class="w-5 h-5 text-primary-green mr-3" fill="currentColor"
+                                viewBox="0 0 20 20">
+                                <path fill-rule="evenodd"
+                                    d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+                                    clip-rule="evenodd"></path>
+                            </svg>Dashboard básico</li>
+                        <li class="flex items-center"><svg class="w-5 h-5 text-primary-green mr-3" fill="currentColor"
+                                viewBox="0 0 20 20">
+                                <path fill-rule="evenodd"
+                                    d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+                                    clip-rule="evenodd"></path>
+                            </svg>Relatórios mensais</li>
+                        <li class="flex items-center"><svg class="w-5 h-5 text-primary-green mr-3" fill="currentColor"
+                                viewBox="0 0 20 20">
+                                <path fill-rule="evenodd"
+                                    d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+                                    clip-rule="evenodd"></path>
+                            </svg>Suporte por email</li>
+                        <li class="flex items-center"><svg class="w-5 h-5 text-primary-green mr-3" fill="currentColor"
+                                viewBox="0 0 20 20">
+                                <path fill-rule="evenodd"
+                                    d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+                                    clip-rule="evenodd"></path>
+                            </svg>Integração básica</li>
+                    </ul>
+                    <a href="https://wa.me/5547992842922?text=Olá! Gostaria de contratar o Plano Básico do sistema de controle de TurnOver da Simplifique+"
+                        target="_blank"
+                        class="w-full bg-gray-200 text-gray-700 py-3 rounded-lg font-semibold hover:bg-primary-blue hover:text-white transition-all duration-300 inline-block text-center">Escolher
+                        Plano</a>
+                </div>
+                <div
+                    class="bg-white p-8 rounded-2xl shadow-xl border-2 border-primary-red relative transform scale-105">
+                    <div class="absolute -top-4 left-1/2 transform -translate-x-1/2"><span
+                            class="bg-primary-red text-white px-4 py-2 rounded-full text-sm font-semibold">Mais
+                            Popular</span></div>
+                    <div class="text-center mb-8">
+                        <h3 class="text-2xl font-bold text-primary-blue mb-4">Profissional</h3>
+                        <div class="flex items-baseline justify-center"><span
+                                class="text-3xl font-bold text-primary-red">R$ 199</span><span
+                                class="text-gray-600 ml-2">/mês</span></div>
+                    </div>
+                    <ul class="space-y-4 mb-8">
+                        <li class="flex items-center"><svg class="w-5 h-5 text-primary-green mr-3" fill="currentColor"
+                                viewBox="0 0 20 20">
+                                <path fill-rule="evenodd"
+                                    d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+                                    clip-rule="evenodd"></path>
+                            </svg>Até 200 funcionários</li>
+                        <li class="flex items-center"><svg class="w-5 h-5 text-primary-green mr-3" fill="currentColor"
+                                viewBox="0 0 20 20">
+                                <path fill-rule="evenodd"
+                                    d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+                                    clip-rule="evenodd"></path>
+                            </svg>Dashboard avançado</li>
+                        <li class="flex items-center"><svg class="w-5 h-5 text-primary-green mr-3" fill="currentColor"
+                                viewBox="0 0 20 20">
+                                <path fill-rule="evenodd"
+                                    d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+                                    clip-rule="evenodd"></path>
+                            </svg>Relatórios em tempo real</li>
+                        <li class="flex items-center"><svg class="w-5 h-5 text-primary-green mr-3" fill="currentColor"
+                                viewBox="0 0 20 20">
+                                <path fill-rule="evenodd"
+                                    d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+                                    clip-rule="evenodd"></path>
+                            </svg>Alertas inteligentes</li>
+                        <li class="flex items-center"><svg class="w-5 h-5 text-primary-green mr-3" fill="currentColor"
+                                viewBox="0 0 20 20">
+                                <path fill-rule="evenodd"
+                                    d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+                                    clip-rule="evenodd"></path>
+                            </svg>Integrações completas</li>
+                        <li class="flex items-center"><svg class="w-5 h-5 text-primary-green mr-3" fill="currentColor"
+                                viewBox="0 0 20 20">
+                                <path fill-rule="evenodd"
+                                    d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+                                    clip-rule="evenodd"></path>
+                            </svg>Suporte prioritário</li>
+                        <li class="flex items-center"><svg class="w-5 h-5 text-primary-green mr-3" fill="currentColor"
+                                viewBox="0 0 20 20">
+                                <path fill-rule="evenodd"
+                                    d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+                                    clip-rule="evenodd"></path>
+                            </svg>Previsões de IA</li>
+                    </ul>
+                    <a href="https://wa.me/5547992842922?text=Olá! Gostaria de contratar o Plano Profissional do sistema de controle de TurnOver da Simplifique+"
+                        target="_blank"
+                        class="w-full bg-primary-red text-white py-3 rounded-lg font-semibold hover:bg-red-700 transition-all duration-300 inline-block text-center">Escolher
+                        Plano</a>
+                </div>
+                <div
+                    class="bg-white p-8 rounded-2xl shadow-lg border border-gray-200 hover:shadow-xl transition-all duration-300">
+                    <div class="text-center mb-8">
+                        <h3 class="text-2xl font-bold text-primary-blue mb-4">Enterprise</h3>
+                        <div class="flex items-baseline justify-center"><span
+                                class="text-3xl font-bold text-primary-red">R$ 399</span><span
+                                class="text-gray-600 ml-2">/mês</span></div>
+                    </div>
+                    <ul class="space-y-4 mb-8">
+                        <li class="flex items-center"><svg class="w-5 h-5 text-primary-green mr-3" fill="currentColor"
+                                viewBox="0 0 20 20">
+                                <path fill-rule="evenodd"
+                                    d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+                                    clip-rule="evenodd"></path>
+                            </svg>Funcionários ilimitados</li>
+                        <li class="flex items-center"><svg class="w-5 h-5 text-primary-green mr-3" fill="currentColor"
+                                viewBox="0 0 20 20">
+                                <path fill-rule="evenodd"
+                                    d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+                                    clip-rule="evenodd"></path>
+                            </svg>Dashboard personalizado</li>
+                        <li class="flex items-center"><svg class="w-5 h-5 text-primary-green mr-3" fill="currentColor"
+                                viewBox="0 0 20 20">
+                                <path fill-rule="evenodd"
+                                    d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+                                    clip-rule="evenodd"></path>
+                            </svg>Relatórios customizados</li>
+                        <li class="flex items-center"><svg class="w-5 h-5 text-primary-green mr-3" fill="currentColor"
+                                viewBox="0 0 20 20">
+                                <path fill-rule="evenodd"
+                                    d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+                                    clip-rule="evenodd"></path>
+                            </svg>API completa</li>
+                        <li class="flex items-center"><svg class="w-5 h-5 text-primary-green mr-3" fill="currentColor"
+                                viewBox="0 0 20 20">
+                                <path fill-rule="evenodd"
+                                    d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+                                    clip-rule="evenodd"></path>
+                            </svg>Multi-empresa</li>
+                        <li class="flex items-center"><svg class="w-5 h-5 text-primary-green mr-3" fill="currentColor"
+                                viewBox="0 0 20 20">
+                                <path fill-rule="evenodd"
+                                    d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+                                    clip-rule="evenodd"></path>
+                            </svg>Suporte 24/7</li>
+                        <li class="flex items-center"><svg class="w-5 h-5 text-primary-green mr-3" fill="currentColor"
+                                viewBox="0 0 20 20">
+                                <path fill-rule="evenodd"
+                                    d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+                                    clip-rule="evenodd"></path>
+                            </svg>Treinamento personalizado</li>
+                        <li class="flex items-center"><svg class="w-5 h-5 text-primary-green mr-3" fill="currentColor"
+                                viewBox="0 0 20 20">
+                                <path fill-rule="evenodd"
+                                    d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+                                    clip-rule="evenodd"></path>
+                            </svg>Consultoria incluída</li>
+                    </ul>
+                    <a href="https://wa.me/5547992842922?text=Olá! Gostaria de falar sobre o Plano Enterprise do sistema de controle de TurnOver da Simplifique+"
+                        target="_blank"
+                        class="w-full bg-gray-200 text-gray-700 py-3 rounded-lg font-semibold hover:bg-primary-blue hover:text-white transition-all duration-300 inline-block text-center">Falar
+                        com Vendas</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="py-20 bg-gradient-to-r from-primary-blue to-primary-purple text-white">
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <h2 class="text-4xl font-bold mb-6">Pronto para reduzir o turnover da sua empresa?</h2>
+            <p class="text-xl mb-8 opacity-90">Comece hoje mesmo e veja a diferença em apenas 30 dias. Garantia de
+                satisfação ou seu dinheiro de volta.</p>
+            <div class="flex flex-col sm:flex-row gap-4 justify-center mb-6">
+                <a href="https://wa.me/5547992842922?text=Olá! Gostaria de começar o teste grátis do sistema de controle de TurnOver da Simplifique+"
+                    target="_blank"
+                    class="bg-white text-primary-blue px-8 py-4 rounded-lg font-semibold text-lg hover:bg-gray-100 transition-all duration-300 shadow-lg hover:shadow-xl transform hover:-translate-y-1 inline-block text-center">Começar
+                    Teste Grátis</a>
+                <a href="https://wa.me/5547992842922?text=Olá! Gostaria de agendar uma demonstração do sistema de controle de TurnOver da Simplifique+"
+                    target="_blank"
+                    class="border-2 border-white text-white px-8 py-4 rounded-lg font-semibold text-lg hover:bg-white hover:text-primary-blue transition-all duration-300 inline-block text-center">Agendar
+                    Demonstração</a>
+            </div>
+            <p class="text-sm opacity-80">Teste grátis por 14 dias • Sem compromisso • Cancele quando quiser</p>
+        </div>
+    </section>
+
+    <!-- Contact Form Section -->
+    <section id="contato" class="py-20 bg-white">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl font-bold text-primary-blue mb-4">Fale conosco</h2>
+                <p class="text-xl text-gray-600">Tire suas dúvidas ou solicite uma demonstração personalizada</p>
+            </div>
+            <div class="grid lg:grid-cols-3 gap-8">
+                <!-- Contact Info -->
+                <div class="lg:col-span-1 space-y-8">
+                    <div>
+                        <h3 class="text-2xl font-semibold text-primary-blue mb-6">Informações de Contato</h3>
+                        <div class="space-y-4">
+                            <div class="flex items-center space-x-4">
+                                <div class="w-12 h-12 bg-primary-red/10 rounded-lg flex items-center justify-center">
+                                    <svg class="w-6 h-6 text-primary-red" fill="none" stroke="currentColor"
+                                        viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                            d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z">
+                                        </path>
+                                    </svg>
+                                </div>
+                                <div>
+                                    <p class="font-semibold text-gray-900">Telefone</p>
+                                    <p class="text-gray-600">(47) 99928-42922</p>
+                                </div>
+                            </div>
+                            <div class="flex items-center space-x-4">
+                                <div class="w-12 h-12 bg-primary-red/10 rounded-lg flex items-center justify-center">
+                                    <svg class="w-6 h-6 text-primary-red" fill="none" stroke="currentColor"
+                                        viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                            d="M3 8l7.89 4.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z">
+                                        </path>
+                                    </svg>
+                                </div>
+                                <div>
+                                    <p class="font-semibold text-gray-900">Email</p>
+                                    <p class="text-gray-600">contato@simplifique.com.br</p>
+                                </div>
+                            </div>
+                            <div class="flex items-center space-x-4">
+                                <div class="w-12 h-12 bg-primary-red/10 rounded-lg flex items-center justify-center">
+                                    <svg class="w-6 h-6 text-primary-red" fill="none" stroke="currentColor"
+                                        viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                            d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z">
+                                        </path>
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                            d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path>
+                                    </svg>
+                                </div>
+                                <div>
+                                    <p class="font-semibold text-gray-900">Endereço</p>
+                                    <p class="text-gray-600">Florianópolis, SC - Brasil</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="bg-gray-50 p-6 rounded-xl">
+                        <h4 class="text-lg font-semibold text-primary-blue mb-4">Horário de Atendimento</h4>
+                        <p class="text-gray-600 mb-2">Segunda a Sexta: 8h às 18h</p>
+                        <p class="text-gray-600">Sábado: 8h às 12h</p>
+                    </div>
+                </div>
+
+                <!-- Contact Form -->
+                <div class="lg:col-span-2 bg-gray-50 p-8 rounded-xl">
+                    <form id="contactForm" class="space-y-6">
+                        <div class="grid md:grid-cols-2 gap-6">
+                            <div>
+                                <label for="nome" class="block text-sm font-medium text-gray-700 mb-2">Nome completo
+                                    *</label>
+                                <input type="text" id="nome" name="nome" required
+                                    class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-red focus:border-transparent transition-colors duration-300"
+                                    placeholder="Seu nome completo">
+                            </div>
+                            <div>
+                                <label for="empresa"
+                                    class="block text-sm font-medium text-gray-700 mb-2">Empresa</label>
+                                <input type="text" id="empresa" name="empresa"
+                                    class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-red focus:border-transparent transition-colors duration-300"
+                                    placeholder="Nome da sua empresa">
+                            </div>
+                        </div>
+                        <div class="grid md:grid-cols-2 gap-6">
+                            <div>
+                                <label for="email" class="block text-sm font-medium text-gray-700 mb-2">Email *</label>
+                                <input type="email" id="email" name="email" required
+                                    class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-red focus:border-transparent transition-colors duration-300"
+                                    placeholder="seu@email.com">
+                            </div>
+                            <div>
+                                <label for="telefone" class="block text-sm font-medium text-gray-700 mb-2">Telefone
+                                    *</label>
+                                <input type="tel" id="telefone" name="telefone" required
+                                    class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-red focus:border-transparent transition-colors duration-300"
+                                    placeholder="(47) 99999-9999">
+                            </div>
+                        </div>
+                        <div>
+                            <label for="cargo" class="block text-sm font-medium text-gray-700 mb-2">Cargo</label>
+                            <select id="cargo" name="cargo"
+                                class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-red focus:border-transparent transition-colors duration-300">
+                                <option value="">Selecione seu cargo</option>
+                                <option value="CEO/Diretor">CEO/Diretor</option>
+                                <option value="Gerente de RH">Gerente de RH</option>
+                                <option value="Coordenador de RH">Coordenador de RH</option>
+                                <option value="Analista de RH">Analista de RH</option>
+                                <option value="Gestor de Pessoas">Gestor de Pessoas</option>
+                                <option value="Outro">Outro</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label for="funcionarios" class="block text-sm font-medium text-gray-700 mb-2">Número de
+                                funcionários</label>
+                            <select id="funcionarios" name="funcionarios"
+                                class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-red focus:border-transparent transition-colors duration-300">
+                                <option value="">Selecione o porte da empresa</option>
+                                <option value="1-10">1-10 funcionários</option>
+                                <option value="11-50">11-50 funcionários</option>
+                                <option value="51-200">51-200 funcionários</option>
+                                <option value="201-500">201-500 funcionários</option>
+                                <option value="500+">Mais de 500 funcionários</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label for="interesse"
+                                class="block text-sm font-medium text-gray-700 mb-2">Interesse</label>
+                            <select id="interesse" name="interesse"
+                                class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-red focus:border-transparent transition-colors duration-300">
+                                <option value="">Selecione seu interesse</option>
+                                <option value="Demonstração">Solicitar demonstração</option>
+                                <option value="Teste grátis">Teste grátis</option>
+                                <option value="Informações sobre preços">Informações sobre preços</option>
+                                <option value="Integração">Dúvidas sobre integração</option>
+                                <option value="Suporte">Suporte técnico</option>
+                                <option value="Outro">Outro</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label for="mensagem" class="block text-sm font-medium text-gray-700 mb-2">Mensagem</label>
+                            <textarea id="mensagem" name="mensagem" rows="4"
+                                class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-red focus:border-transparent transition-colors duration-300"
+                                placeholder="Conte-nos mais sobre suas necessidades..."></textarea>
+                        </div>
+                        <button type="submit" id="submitBtn"
+                            class="w-full bg-primary-red text-white py-4 rounded-lg font-semibold text-lg hover:bg-red-700 transition-all duration-300 shadow-lg hover:shadow-xl transform hover:-translate-y-1 disabled:opacity-50 disabled:cursor-not-allowed">
+                            <span id="btnText">Enviar Mensagem</span>
+                            <span id="btnLoading" class="hidden">
+                                <svg class="animate-spin -ml-1 mr-3 h-5 w-5 text-white inline"
+                                    xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                                    <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor"
+                                        stroke-width="4"></circle>
+                                    <path class="opacity-75" fill="currentColor"
+                                        d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z">
+                                    </path>
+                                </svg>
+                                Enviando...
+                            </span>
+                        </button>
+                        <p class="text-sm text-gray-500 text-center">Sua mensagem será enviada por email</p>
+
+                        <!-- Feedback Messages -->
+                        <div id="feedbackMessage" class="hidden mt-4 p-4 rounded-lg"></div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-white py-16">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid md:grid-cols-4 gap-8">
+                <div class="md:col-span-1">
+                    <div class="flex items-center space-x-3 mb-4">
+                        <div class="w-10 h-10 flex items-center justify-center">
+                            <svg width="40" height="40" viewBox="0 0 48 48" fill="none">
+                                <rect x="8" y="6" width="32" height="28" rx="2" stroke="#E60011" stroke-width="2"
+                                    fill="none" />
+                                <line x1="12" y1="12" x2="28" y2="12" stroke="#E60011" stroke-width="1.5" />
+                                <line x1="12" y1="16" x2="24" y2="16" stroke="#E60011" stroke-width="1.5" />
+                                <line x1="12" y1="20" x2="26" y2="20" stroke="#E60011" stroke-width="1.5" />
+                                <path d="M20 24L24 28L20 32" stroke="#E60011" stroke-width="2" fill="none" />
+                            </svg>
+                        </div>
+                        <span class="text-2xl font-bold">simplifique<span class="text-primary-red">+</span></span>
+                    </div>
+                    <p class="text-gray-400 leading-relaxed">A solução completa para controle de turnover empresarial.
+                    </p>
+                </div>
+                <div>
+                    <h4 class="text-lg font-semibold mb-4">Produto</h4>
+                    <ul class="space-y-2">
+                        <li><a href="#"
+                                class="text-gray-400 hover:text-white transition-colors duration-300">Recursos</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition-colors duration-300">Preços</a>
+                        </li>
+                        <li><a href="#"
+                                class="text-gray-400 hover:text-white transition-colors duration-300">Demonstração</a>
+                        </li>
+                        <li><a href="#"
+                                class="text-gray-400 hover:text-white transition-colors duration-300">Integrações</a>
+                        </li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="text-lg font-semibold mb-4">Empresa</h4>
+                    <ul class="space-y-2">
+                        <li><a href="#" class="text-gray-400 hover:text-white transition-colors duration-300">Sobre
+                                Nós</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition-colors duration-300">Blog</a>
+                        </li>
+                        <li><a href="#"
+                                class="text-gray-400 hover:text-white transition-colors duration-300">Carreiras</a></li>
+                        <li><a href="#"
+                                class="text-gray-400 hover:text-white transition-colors duration-300">Imprensa</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="text-lg font-semibold mb-4">Suporte</h4>
+                    <ul class="space-y-2">
+                        <li><a href="#" class="text-gray-400 hover:text-white transition-colors duration-300">Central de
+                                Ajuda</a></li>
+                        <li><a href="#"
+                                class="text-gray-400 hover:text-white transition-colors duration-300">Documentação</a>
+                        </li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition-colors duration-300">Status</a>
+                        </li>
+                        <li><a href="#"
+                                class="text-gray-400 hover:text-white transition-colors duration-300">Contato</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="border-t border-gray-800 mt-12 pt-8 flex flex-col md:flex-row justify-between items-center">
+                <p class="text-gray-400 text-sm">© 2024 Simplifique+. Todos os direitos reservados.</p>
+                <div class="flex space-x-6 mt-4 md:mt-0">
+                    <a href="#" class="text-gray-400 hover:text-white transition-colors duration-300 text-sm">Termos de
+                        Uso</a>
+                    <a href="#" class="text-gray-400 hover:text-white transition-colors duration-300 text-sm">Política
+                        de Privacidade</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- WhatsApp Floating Button -->
+    <div class="fixed bottom-6 right-6 z-50">
+        <a href="https://wa.me/5547992842922?text=Olá! Gostaria de falar com o especialista sobre o sistema de controle de TurnOver da Simplifique+"
+            target="_blank"
+            class="group relative flex items-center justify-center w-16 h-16 bg-green-500 hover:bg-green-600 rounded-full shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-110 animate-bounce">
+            <!-- WhatsApp Icon -->
+            <svg class="w-8 h-8 text-white" fill="currentColor" viewBox="0 0 24 24">
+                <path
+                    d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893A11.821 11.821 0 0020.885 3.488" />
+            </svg>
+
+            <!-- Pulse Animation -->
+            <div class="absolute inset-0 rounded-full bg-green-500 animate-ping opacity-20"></div>
+
+            <!-- Tooltip -->
+            <div
+                class="absolute right-20 top-1/2 transform -translate-y-1/2 bg-gray-900 text-white px-3 py-2 rounded-lg text-sm font-medium opacity-0 group-hover:opacity-100 transition-opacity duration-300 whitespace-nowrap">
+                Fale conosco no WhatsApp
+                <div
+                    class="absolute right-0 top-1/2 transform translate-x-1 -translate-y-1/2 w-0 h-0 border-l-4 border-l-gray-900 border-t-4 border-t-transparent border-b-4 border-b-transparent">
+                </div>
+            </div>
+        </a>
+    </div>
+
+    <script>
+        // Smooth scrolling
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            });
+        });
+
+        // Contact form handling
+        document.querySelector('form').addEventListener('submit', function (e) {
+            e.preventDefault();
+
+            const formData = new FormData(this);
+            const nome = formData.get('nome');
+            const empresa = formData.get('empresa');
+            const email = formData.get('email');
+            const telefone = formData.get('telefone');
+            const cargo = formData.get('cargo');
+            const funcionarios = formData.get('funcionarios');
+            const interesse = formData.get('interesse');
+            const mensagem = formData.get('mensagem');
+
+            let whatsappMessage = `Olá! Recebi seu contato através do site da Simplifique+.\n\n`;
+            whatsappMessage += `*Dados do contato:*\n`;
+            whatsappMessage += `Nome: ${nome}\n`;
+            if (empresa) whatsappMessage += `Empresa: ${empresa}\n`;
+            whatsappMessage += `Email: ${email}\n`;
+            whatsappMessage += `Telefone: ${telefone}\n`;
+            if (cargo) whatsappMessage += `Cargo: ${cargo}\n`;
+            if (funcionarios) whatsappMessage += `Funcionários: ${funcionarios}\n`;
+            if (interesse) whatsappMessage += `Interesse: ${interesse}\n`;
+            if (mensagem) whatsappMessage += `Mensagem: ${mensagem}\n`;
+
+            const whatsappUrl = `https://wa.me/5547992842922?text=${encodeURIComponent(whatsappMessage)}`;
+            window.open(whatsappUrl, '_blank');
+        });
+    </script>
+</body>
+
+</html>
