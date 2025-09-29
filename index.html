@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Simplifique+ - Sistema de Controle de TurnOver</title>
     <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     <script>
         tailwind.config = {
@@ -512,12 +513,7 @@
 
                 <!-- Contact Form -->
                 <div class="lg:col-span-2 bg-gray-50 p-8 rounded-xl">
-                    <form id="contactForm" action="https://formspree.io/f/xpzqkqkq" method="POST" class="space-y-6">
-                        <!-- Campo oculto para email de destino -->
-                        <input type="hidden" name="_to" value="fullstack.ads@gmail.com">
-                        <input type="hidden" name="_subject" value="Novo contato do site Simplifique+">
-                        <input type="hidden" name="_replyto" value="">
-                        <input type="hidden" name="_cc" value="">
+                    <form id="contactForm" class="space-y-6">
 
                         <div class="grid md:grid-cols-2 gap-6">
                             <div>
@@ -611,7 +607,8 @@
                                 Enviando...
                             </span>
                         </button>
-                        <p class="text-sm text-gray-500 text-center">Sua mensagem será enviada diretamente para nosso email</p>
+                        <p class="text-sm text-gray-500 text-center">Sua mensagem será enviada diretamente para nosso
+                            email</p>
 
                         <!-- Feedback Messages -->
                         <div id="feedbackMessage" class="hidden mt-4 p-4 rounded-lg"></div>
@@ -726,6 +723,9 @@
         // Aguardar o DOM carregar completamente
         document.addEventListener('DOMContentLoaded', function () {
             console.log('DOM carregado!'); // Debug
+            
+            // Inicializar EmailJS
+            emailjs.init('YOUR_PUBLIC_KEY'); // Substitua pela sua chave pública do EmailJS
 
             // Mobile menu toggle
             const mobileMenuButton = document.getElementById('mobile-menu-button');
@@ -756,7 +756,7 @@
             const contactForm = document.querySelector('#contactForm');
             if (contactForm) {
                 console.log('Formulário encontrado!'); // Debug
-                
+
                 contactForm.addEventListener('submit', function (e) {
                     e.preventDefault();
                     console.log('Formulário enviado!'); // Debug
@@ -783,32 +783,34 @@
                     const submitBtn = document.getElementById('submitBtn');
                     const btnText = document.getElementById('btnText');
                     const btnLoading = document.getElementById('btnLoading');
-                    
+
                     if (submitBtn && btnText && btnLoading) {
                         submitBtn.disabled = true;
                         btnText.classList.add('hidden');
                         btnLoading.classList.remove('hidden');
                     }
 
-                    // Enviar para Formspree
-                    fetch('https://formspree.io/f/xpzqkqkq', {
-                        method: 'POST',
-                        body: formData,
-                        headers: {
-                            'Accept': 'application/json'
-                        }
+                    // Enviar via EmailJS
+                    const templateParams = {
+                        from_name: nome,
+                        from_email: email,
+                        empresa: empresa || 'Não informado',
+                        telefone: telefone,
+                        cargo: cargo || 'Não informado',
+                        funcionarios: funcionarios || 'Não informado',
+                        interesse: interesse || 'Não informado',
+                        message: mensagem || 'Sem mensagem adicional',
+                        to_email: 'fullstack.ads@gmail.com'
+                    };
+
+                    emailjs.send('YOUR_SERVICE_ID', 'YOUR_TEMPLATE_ID', templateParams)
+                    .then(function(response) {
+                        console.log('Email enviado com sucesso!', response.status, response.text);
+                        alert('Mensagem enviada com sucesso! Entraremos em contato em breve.');
+                        contactForm.reset();
                     })
-                    .then(response => {
-                        console.log('Resposta do Formspree:', response); // Debug
-                        if (response.ok) {
-                            alert('Mensagem enviada com sucesso! Entraremos em contato em breve.');
-                            contactForm.reset();
-                        } else {
-                            throw new Error('Erro ao enviar formulário');
-                        }
-                    })
-                    .catch(error => {
-                        console.error('Erro:', error); // Debug
+                    .catch(function(error) {
+                        console.error('Erro ao enviar email:', error);
                         alert('Erro ao enviar mensagem. Tente novamente ou entre em contato por telefone.');
                     })
                     .finally(() => {
