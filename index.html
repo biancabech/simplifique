@@ -5,6 +5,23 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Simplifique+ - Sistema de Controle de TurnOver</title>
+    <meta name="description" content="Sistema de controle de TurnOver empresarial. Reduza custos, melhore retenção e tome decisões baseadas em dados reais. Teste grátis por 14 dias.">
+    <meta name="keywords" content="turnover, controle de funcionários, RH, gestão de pessoas, retenção de talentos, análise de dados">
+    <meta name="author" content="Simplifique+">
+    
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://biancabech.github.io/simplifique/">
+    <meta property="og:title" content="Simplifique+ - Sistema de Controle de TurnOver">
+    <meta property="og:description" content="Gerencie o turnover da sua empresa de forma eficiente e inteligente. Reduza custos, melhore a retenção e tome decisões baseadas em dados reais.">
+    <meta property="og:image" content="https://biancabech.github.io/simplifique/og-image.jpg">
+    
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="https://biancabech.github.io/simplifique/">
+    <meta property="twitter:title" content="Simplifique+ - Sistema de Controle de TurnOver">
+    <meta property="twitter:description" content="Gerencie o turnover da sua empresa de forma eficiente e inteligente. Reduza custos, melhore a retenção e tome decisões baseadas em dados reais.">
+    <meta property="twitter:image" content="https://biancabech.github.io/simplifique/og-image.jpg">
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     <script>
@@ -29,7 +46,7 @@
             <div class="flex justify-between items-center h-16">
                 <div class="flex items-center space-x-3">
                     <div class="w-12 h-12 flex items-center justify-center">
-                        <svg width="48" height="48" viewBox="0 0 48 48" fill="none">
+                        <svg width="48" height="48" viewBox="0 0 48 48" fill="none" aria-label="Logo Simplifique+">
                             <rect x="8" y="6" width="32" height="28" rx="2" stroke="#E60011" stroke-width="2"
                                 fill="none" />
                             <line x1="12" y1="12" x2="28" y2="12" stroke="#E60011" stroke-width="1.5" />
@@ -55,8 +72,10 @@
 
                 <!-- Mobile menu button -->
                 <button id="mobile-menu-button"
-                    class="md:hidden p-2 text-gray-700 hover:text-primary-red transition-colors duration-300">
-                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    class="md:hidden p-2 text-gray-700 hover:text-primary-red transition-colors duration-300"
+                    aria-label="Abrir menu de navegação"
+                    aria-expanded="false">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                             d="M4 6h16M4 12h16M4 18h16"></path>
                     </svg>
@@ -725,7 +744,6 @@
     <script>
         // Aguardar o DOM carregar completamente
         document.addEventListener('DOMContentLoaded', function () {
-            console.log('DOM carregado!'); // Debug
 
             // Mobile menu toggle
             const mobileMenuButton = document.getElementById('mobile-menu-button');
@@ -755,11 +773,9 @@
             // Contact form handling
             const contactForm = document.querySelector('#contactForm');
             if (contactForm) {
-                console.log('Formulário encontrado!'); // Debug
 
                 contactForm.addEventListener('submit', function (e) {
                     e.preventDefault();
-                    console.log('Formulário enviado!'); // Debug
 
                     const formData = new FormData(this);
                     const nome = formData.get('nome');
@@ -771,7 +787,6 @@
                     const interesse = formData.get('interesse');
                     const mensagem = formData.get('mensagem');
 
-                    console.log('Dados coletados:', { nome, empresa, email, telefone, cargo, funcionarios, interesse, mensagem }); // Debug
 
                     // Validar campos obrigatórios
                     if (!nome || !email || !telefone) {
@@ -791,7 +806,6 @@
                     }
 
                     // Enviar via Web3Forms
-                    const formData = new FormData(this);
 
                     fetch('https://api.web3forms.com/submit', {
                         method: 'POST',
@@ -799,7 +813,6 @@
                     })
                         .then(response => response.json())
                         .then(data => {
-                            console.log('Resposta do Web3Forms:', data);
                             if (data.success) {
                                 alert('Mensagem enviada com sucesso! Entraremos em contato em breve.');
                                 contactForm.reset();
@@ -808,7 +821,6 @@
                             }
                         })
                         .catch(error => {
-                            console.error('Erro:', error);
                             alert('Erro ao enviar mensagem. Tente novamente ou entre em contato por telefone.');
                         })
                         .finally(() => {
@@ -821,7 +833,6 @@
                         });
                 });
             } else {
-                console.error('Formulário não encontrado!'); // Debug
             }
         });
     </script>
