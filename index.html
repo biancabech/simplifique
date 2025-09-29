@@ -6,7 +6,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Simplifique+ - Sistema de Controle de TurnOver</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     <script>
         tailwind.config = {
@@ -513,7 +512,11 @@
 
                 <!-- Contact Form -->
                 <div class="lg:col-span-2 bg-gray-50 p-8 rounded-xl">
-                    <form id="contactForm" class="space-y-6">
+                    <form id="contactForm" action="https://api.web3forms.com/submit" method="POST" class="space-y-6">
+                        <input type="hidden" name="access_key" value="YOUR_ACCESS_KEY">
+                        <input type="hidden" name="subject" value="Novo contato do site Simplifique+">
+                        <input type="hidden" name="from_name" value="Site Simplifique+">
+                        <input type="hidden" name="redirect" value="false">
 
                         <div class="grid md:grid-cols-2 gap-6">
                             <div>
@@ -723,9 +726,6 @@
         // Aguardar o DOM carregar completamente
         document.addEventListener('DOMContentLoaded', function () {
             console.log('DOM carregado!'); // Debug
-            
-            // Inicializar EmailJS
-            emailjs.init('YOUR_PUBLIC_KEY'); // Substitua pela sua chave pública do EmailJS
 
             // Mobile menu toggle
             const mobileMenuButton = document.getElementById('mobile-menu-button');
@@ -790,37 +790,35 @@
                         btnLoading.classList.remove('hidden');
                     }
 
-                    // Enviar via EmailJS
-                    const templateParams = {
-                        from_name: nome,
-                        from_email: email,
-                        empresa: empresa || 'Não informado',
-                        telefone: telefone,
-                        cargo: cargo || 'Não informado',
-                        funcionarios: funcionarios || 'Não informado',
-                        interesse: interesse || 'Não informado',
-                        message: mensagem || 'Sem mensagem adicional',
-                        to_email: 'fullstack.ads@gmail.com'
-                    };
+                    // Enviar via Web3Forms
+                    const formData = new FormData(this);
 
-                    emailjs.send('YOUR_SERVICE_ID', 'YOUR_TEMPLATE_ID', templateParams)
-                    .then(function(response) {
-                        console.log('Email enviado com sucesso!', response.status, response.text);
-                        alert('Mensagem enviada com sucesso! Entraremos em contato em breve.');
-                        contactForm.reset();
+                    fetch('https://api.web3forms.com/submit', {
+                        method: 'POST',
+                        body: formData
                     })
-                    .catch(function(error) {
-                        console.error('Erro ao enviar email:', error);
-                        alert('Erro ao enviar mensagem. Tente novamente ou entre em contato por telefone.');
-                    })
-                    .finally(() => {
-                        // Restaurar botão
-                        if (submitBtn && btnText && btnLoading) {
-                            submitBtn.disabled = false;
-                            btnText.classList.remove('hidden');
-                            btnLoading.classList.add('hidden');
-                        }
-                    });
+                        .then(response => response.json())
+                        .then(data => {
+                            console.log('Resposta do Web3Forms:', data);
+                            if (data.success) {
+                                alert('Mensagem enviada com sucesso! Entraremos em contato em breve.');
+                                contactForm.reset();
+                            } else {
+                                throw new Error(data.message || 'Erro ao enviar formulário');
+                            }
+                        })
+                        .catch(error => {
+                            console.error('Erro:', error);
+                            alert('Erro ao enviar mensagem. Tente novamente ou entre em contato por telefone.');
+                        })
+                        .finally(() => {
+                            // Restaurar botão
+                            if (submitBtn && btnText && btnLoading) {
+                                submitBtn.disabled = false;
+                                btnText.classList.remove('hidden');
+                                btnLoading.classList.add('hidden');
+                            }
+                        });
                 });
             } else {
                 console.error('Formulário não encontrado!'); // Debug
