@@ -458,7 +458,7 @@
                                 </div>
                                 <div>
                                     <p class="font-semibold text-gray-900">Email</p>
-                                    <p class="text-gray-600">contato@simplifique.com.br</p>
+                                    <p class="text-gray-600">fullstack.ads@gmail.com</p>
                                 </div>
                             </div>
                             <div class="flex items-center space-x-4">
@@ -716,19 +716,30 @@
             const interesse = formData.get('interesse');
             const mensagem = formData.get('mensagem');
 
-            let whatsappMessage = `Olá! Recebi seu contato através do site da Simplifique+.\n\n`;
-            whatsappMessage += `*Dados do contato:*\n`;
-            whatsappMessage += `Nome: ${nome}\n`;
-            if (empresa) whatsappMessage += `Empresa: ${empresa}\n`;
-            whatsappMessage += `Email: ${email}\n`;
-            whatsappMessage += `Telefone: ${telefone}\n`;
-            if (cargo) whatsappMessage += `Cargo: ${cargo}\n`;
-            if (funcionarios) whatsappMessage += `Funcionários: ${funcionarios}\n`;
-            if (interesse) whatsappMessage += `Interesse: ${interesse}\n`;
-            if (mensagem) whatsappMessage += `Mensagem: ${mensagem}\n`;
+            // Montar o assunto do email
+            let assunto = `Contato do Site - ${nome}`;
+            if (empresa) assunto += ` (${empresa})`;
 
-            const whatsappUrl = `https://wa.me/5547992842922?text=${encodeURIComponent(whatsappMessage)}`;
-            window.open(whatsappUrl, '_blank');
+            // Montar o corpo do email
+            let corpoEmail = `Olá!\n\n`;
+            corpoEmail += `Recebi um novo contato através do site da Simplifique+.\n\n`;
+            corpoEmail += `DADOS DO CONTATO:\n`;
+            corpoEmail += `Nome: ${nome}\n`;
+            if (empresa) corpoEmail += `Empresa: ${empresa}\n`;
+            corpoEmail += `Email: ${email}\n`;
+            corpoEmail += `Telefone: ${telefone}\n`;
+            if (cargo) corpoEmail += `Cargo: ${cargo}\n`;
+            if (funcionarios) corpoEmail += `Número de Funcionários: ${funcionarios}\n`;
+            if (interesse) corpoEmail += `Interesse: ${interesse}\n`;
+            if (mensagem) corpoEmail += `Mensagem: ${mensagem}\n\n`;
+            corpoEmail += `---\n`;
+            corpoEmail += `Enviado através do formulário de contato do site simplifique.com.br`;
+
+            // Criar o link mailto
+            const emailUrl = `mailto:fullstack.ads@gmail.com?subject=${encodeURIComponent(assunto)}&body=${encodeURIComponent(corpoEmail)}`;
+            
+            // Abrir o cliente de email
+            window.open(emailUrl, '_blank');
         });
     </script>
 </body>
