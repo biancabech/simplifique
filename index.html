@@ -28,6 +28,7 @@
     <meta property="twitter:image" content="https://biancabech.github.io/simplifique/og-image.jpg">
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
     <script>
         tailwind.config = {
             theme: {
@@ -796,51 +797,29 @@
                         btnLoading.classList.remove('hidden');
                     }
 
-                    // Enviar via Resend
-                    const emailData = {
-                        from: 'onboarding@resend.dev',
-                        to: 'fullstack.ads@gmail.com',
-                        subject: `Novo contato do site Simplifique+ - ${nome}${empresa ? ` (${empresa})` : ''}`,
-                        html: `
-                            <h2>Novo contato do site Simplifique+</h2>
-                            <p><strong>Dados do contato:</strong></p>
-                            <ul>
-                                <li><strong>Nome:</strong> ${nome}</li>
-                                ${empresa ? `<li><strong>Empresa:</strong> ${empresa}</li>` : ''}
-                                <li><strong>Email:</strong> ${email}</li>
-                                <li><strong>Telefone:</strong> ${telefone}</li>
-                                ${cargo ? `<li><strong>Cargo:</strong> ${cargo}</li>` : ''}
-                                ${funcionarios ? `<li><strong>Número de Funcionários:</strong> ${funcionarios}</li>` : ''}
-                                ${interesse ? `<li><strong>Interesse:</strong> ${interesse}</li>` : ''}
-                                ${mensagem ? `<li><strong>Mensagem:</strong> ${mensagem}</li>` : ''}
-                            </ul>
-                            <hr>
-                            <p><em>Enviado através do formulário de contato do site simplifique.com.br</em></p>
-                        `,
-                        reply_to: email
+                    // Enviar via EmailJS
+                    emailjs.init('YOUR_PUBLIC_KEY'); // Substitua pela sua chave pública do EmailJS
+                    
+                    const templateParams = {
+                        from_name: nome,
+                        from_email: email,
+                        empresa: empresa || 'Não informado',
+                        telefone: telefone,
+                        cargo: cargo || 'Não informado',
+                        funcionarios: funcionarios || 'Não informado',
+                        interesse: interesse || 'Não informado',
+                        message: mensagem || 'Sem mensagem adicional'
                     };
 
-                    fetch('https://api.resend.com/emails', {
-                        method: 'POST',
-                        headers: {
-                            'Authorization': 'Bearer re_KHohUiqt_LdTkF6c4NjNos54pdYsotvna',
-                            'Content-Type': 'application/json',
-                        },
-                        body: JSON.stringify(emailData)
-                    })
-                        .then(response => response.json())
-                        .then(data => {
-                            if (data.id) {
-                                alert('Mensagem enviada com sucesso! Entraremos em contato em breve.');
-                                contactForm.reset();
-                            } else {
-                                throw new Error(data.message || 'Erro ao enviar formulário');
-                            }
-                        })
-                        .catch(error => {
-                            console.error('Erro:', error);
+                    emailjs.send('YOUR_SERVICE_ID', 'YOUR_TEMPLATE_ID', templateParams)
+                        .then(function(response) {
+                            console.log('Email enviado com sucesso!', response.status, response.text);
+                            alert('Mensagem enviada com sucesso! Entraremos em contato em breve.');
+                            contactForm.reset();
+                        }, function(error) {
+                            console.error('Erro ao enviar email:', error);
                             alert('Erro ao enviar mensagem. Tente novamente ou entre em contato por telefone.');
-                        })
+                        });
                         .finally(() => {
                             // Restaurar botão
                             if (submitBtn && btnText && btnLoading) {
