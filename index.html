@@ -801,6 +801,7 @@
                     emailjs.init('aXDISZ9uVRQ8-0cAU');
 
                     const templateParams = {
+                        to_email: 'fullstack.ads@gmail.com',
                         from_name: nome,
                         from_email: email,
                         empresa: empresa || 'Não informado',
@@ -820,7 +821,7 @@
                             console.error('Erro ao enviar email:', error);
                             alert('Erro ao enviar mensagem. Tente novamente ou entre em contato por telefone.');
                         })
-                        .finally(function() {
+                        .finally(function () {
                             // Restaurar botão
                             if (submitBtn && btnText && btnLoading) {
                                 submitBtn.disabled = false;
