@@ -819,15 +819,15 @@
                         }, function (error) {
                             console.error('Erro ao enviar email:', error);
                             alert('Erro ao enviar mensagem. Tente novamente ou entre em contato por telefone.');
+                        })
+                        .finally(function() {
+                            // Restaurar botão
+                            if (submitBtn && btnText && btnLoading) {
+                                submitBtn.disabled = false;
+                                btnText.classList.remove('hidden');
+                                btnLoading.classList.add('hidden');
+                            }
                         });
-                        .finally(() => {
-                        // Restaurar botão
-                        if (submitBtn && btnText && btnLoading) {
-                            submitBtn.disabled = false;
-                            btnText.classList.remove('hidden');
-                            btnLoading.classList.add('hidden');
-                        }
-                    });
                 });
             } else {
             }
