@@ -798,8 +798,8 @@
                     }
 
                     // Enviar via EmailJS
-                    emailjs.init('YOUR_PUBLIC_KEY'); // Substitua pela sua chave pública do EmailJS
-                    
+                    emailjs.init('aXDISZ9uVRQ8-0cAU');
+
                     const templateParams = {
                         from_name: nome,
                         from_email: email,
@@ -811,23 +811,23 @@
                         message: mensagem || 'Sem mensagem adicional'
                     };
 
-                    emailjs.send('YOUR_SERVICE_ID', 'YOUR_TEMPLATE_ID', templateParams)
-                        .then(function(response) {
+                    emailjs.send('service_k8hctof', 'template_3jjprpm', templateParams)
+                        .then(function (response) {
                             console.log('Email enviado com sucesso!', response.status, response.text);
                             alert('Mensagem enviada com sucesso! Entraremos em contato em breve.');
                             contactForm.reset();
-                        }, function(error) {
+                        }, function (error) {
                             console.error('Erro ao enviar email:', error);
                             alert('Erro ao enviar mensagem. Tente novamente ou entre em contato por telefone.');
                         });
                         .finally(() => {
-                            // Restaurar botão
-                            if (submitBtn && btnText && btnLoading) {
-                                submitBtn.disabled = false;
-                                btnText.classList.remove('hidden');
-                                btnLoading.classList.add('hidden');
-                            }
-                        });
+                        // Restaurar botão
+                        if (submitBtn && btnText && btnLoading) {
+                            submitBtn.disabled = false;
+                            btnText.classList.remove('hidden');
+                            btnLoading.classList.add('hidden');
+                        }
+                    });
                 });
             } else {
             }
