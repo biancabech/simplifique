@@ -534,11 +534,7 @@
 
                 <!-- Contact Form -->
                 <div class="lg:col-span-2 bg-gray-50 p-8 rounded-xl">
-                    <form id="contactForm" action="https://api.web3forms.com/submit" method="POST" class="space-y-6">
-                        <input type="hidden" name="access_key" value="YOUR_ACCESS_KEY">
-                        <input type="hidden" name="subject" value="Novo contato do site Simplifique+">
-                        <input type="hidden" name="from_name" value="Site Simplifique+">
-                        <input type="hidden" name="redirect" value="false">
+                    <form id="contactForm" class="space-y-6">
 
                         <div class="grid md:grid-cols-2 gap-6">
                             <div>
@@ -800,15 +796,41 @@
                         btnLoading.classList.remove('hidden');
                     }
 
-                    // Enviar via Web3Forms
+                    // Enviar via Resend
+                    const emailData = {
+                        from: 'onboarding@resend.dev',
+                        to: 'fullstack.ads@gmail.com',
+                        subject: `Novo contato do site Simplifique+ - ${nome}${empresa ? ` (${empresa})` : ''}`,
+                        html: `
+                            <h2>Novo contato do site Simplifique+</h2>
+                            <p><strong>Dados do contato:</strong></p>
+                            <ul>
+                                <li><strong>Nome:</strong> ${nome}</li>
+                                ${empresa ? `<li><strong>Empresa:</strong> ${empresa}</li>` : ''}
+                                <li><strong>Email:</strong> ${email}</li>
+                                <li><strong>Telefone:</strong> ${telefone}</li>
+                                ${cargo ? `<li><strong>Cargo:</strong> ${cargo}</li>` : ''}
+                                ${funcionarios ? `<li><strong>Número de Funcionários:</strong> ${funcionarios}</li>` : ''}
+                                ${interesse ? `<li><strong>Interesse:</strong> ${interesse}</li>` : ''}
+                                ${mensagem ? `<li><strong>Mensagem:</strong> ${mensagem}</li>` : ''}
+                            </ul>
+                            <hr>
+                            <p><em>Enviado através do formulário de contato do site simplifique.com.br</em></p>
+                        `,
+                        reply_to: email
+                    };
 
-                    fetch('https://api.web3forms.com/submit', {
+                    fetch('https://api.resend.com/emails', {
                         method: 'POST',
-                        body: formData
+                        headers: {
+                            'Authorization': 'Bearer re_YOUR_API_KEY_HERE',
+                            'Content-Type': 'application/json',
+                        },
+                        body: JSON.stringify(emailData)
                     })
                         .then(response => response.json())
                         .then(data => {
-                            if (data.success) {
+                            if (data.id) {
                                 alert('Mensagem enviada com sucesso! Entraremos em contato em breve.');
                                 contactForm.reset();
                             } else {
@@ -816,6 +838,7 @@
                             }
                         })
                         .catch(error => {
+                            console.error('Erro:', error);
                             alert('Erro ao enviar mensagem. Tente novamente ou entre em contato por telefone.');
                         })
                         .finally(() => {
